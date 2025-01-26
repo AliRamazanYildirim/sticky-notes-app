@@ -1,8 +1,7 @@
-import useNotesStore from "../store/useNotesStore";
 import NoteCard from "../components/NoteCard";
+import {fakeData as notes} from "../assets/fakeData";
 
 const NotesPage = () => {
-    const notes = useNotesStore((state) => state.notes); //Zustand'dan notes al
 
     return (
         <div>
