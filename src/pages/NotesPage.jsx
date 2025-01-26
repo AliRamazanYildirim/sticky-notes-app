@@ -1,9 +1,16 @@
-const NotesPage = () =>{
+import useNotesStore from "../store/useNotesStore";
+import NoteCard from "../components/NoteCard";
+
+const NotesPage = () => {
+    const notes = useNotesStore((state) => state.notes); //Zustand'dan notes al
+
     return (
         <div>
-            <h1>Notes Page</h1>
+            {notes.map((note) => (
+                <NoteCard note={note} key={note.$id} />
+            ))}
         </div>
-    )
-}
+    );
+};
 
-export default NotesPage
+export default NotesPage;
