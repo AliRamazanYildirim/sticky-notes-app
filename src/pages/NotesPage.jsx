@@ -1,13 +1,9 @@
 import NoteCard from "../components/NoteCard";
-import {fakeData as notes} from "../assets/fakeData";
 
 const NotesPage = () => {
-
     return (
         <div>
-            {notes.map((note) => (
-                <NoteCard note={note} key={note.$id} />
-            ))}
+            <NoteCard />
         </div>
     );
 };

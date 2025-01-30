@@ -1,28 +1,23 @@
 import Trash from "../icons/Trash";
+import useNotesStore from "../store/useNotesStore";
 
-const NoteCard = ({ note }) => {
-  const body = JSON.parse(note.body);
-  const position = JSON.parse(note.position);
-  const colors = JSON.parse(note.colors);
-
-  return (
-    <>
-      <div className="card" style={{ backgroundColor: colors.colorBody, left:`${position.x}px`, top:`${position.y}px` }}>
-        <div
-          className="card-header"
-          style={{ backgroundColor: colors.colorHeader }}
-        >
-          <Trash />
-        </div>
-        <div className="card-body">
-          <textarea
-            style={{ color: colors.colorText }}
-            defaultValue={body}
-          ></textarea>
-        </div>
-      </div>
-    </>
-  );
+const NoteCard = () => {
+    const notes = useNotesStore((state) => state.notes);
+    
+    return (
+        <>
+            {notes.map((note) => (
+                <div key={note.$id} className="card" style={{ backgroundColor: note.colors.colorBody, left: `${note.position.x}px`, top: `${note.position.y}px` }}>
+                    <div className="card-header" style={{ backgroundColor: note.colors.colorHeader }}>
+                        <Trash />
+                    </div>
+                    <div className="card-body">
+                        <textarea style={{ color: note.colors.colorText }} defaultValue={note.body}></textarea>
+                    </div>
+                </div>
+            ))}
+        </>
+    );
 };
 
 export default NoteCard;
