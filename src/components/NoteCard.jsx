@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Trash from "../icons/Trash";
 import useNotesStore from "../store/useNotesStore";
+import { setNewOffset } from "../utils/utils";
 
 const NoteCard = () => {
   const {
@@ -35,8 +36,12 @@ const NoteCard = () => {
 
     const deltaX = e.clientX - mouseStartPos.x;
     const deltaY = e.clientY - mouseStartPos.y;
+    const card = cardRefs[draggingId];
+    if (!card) return;
+    
+    const newOffset = setNewOffset(card, { x: -deltaX, y: -deltaY });
 
-    updateNotePosition(draggingId, deltaX, deltaY);
+    updateNotePosition(draggingId, newOffset.x - card.offsetLeft, newOffset.y - card.offsetTop);
     setMouseStartPos({ x: e.clientX, y: e.clientY });
   };
 
