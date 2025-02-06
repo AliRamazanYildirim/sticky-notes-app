@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Trash from "../icons/Trash";
 import useNotesStore from "../store/useNotesStore";
-import { setNewOffset } from "../utils/utils";
+import { setNewOffset, autoGrow } from "../utils/utils";
 
 const NoteCard = () => {
   const {
@@ -18,13 +18,6 @@ const NoteCard = () => {
   useEffect(() => {
     Object.values(textAreaRefs).forEach((ref) => ref && autoGrow(ref));
   }, [notes, textAreaRefs]);
-
-  const autoGrow = (textAreaRef) => {
-    if (textAreaRef) {
-      textAreaRef.style.height = "auto";
-      textAreaRef.style.height = textAreaRef.scrollHeight + "px";
-    }
-  };
 
   const handleMouseDown = (e, id) => {
     setDraggingId(id);

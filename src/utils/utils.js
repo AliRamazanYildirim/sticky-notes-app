@@ -7,3 +7,10 @@ export const setNewOffset = (card, mouseMoveDir = { x: 0, y: 0 }) => {
         y: offsetTop < 0 ? 0 : offsetTop,
     };
 };
+
+export const autoGrow = (textAreaRef) => {
+  if (textAreaRef) {
+    textAreaRef.style.height = "auto";
+    textAreaRef.style.height = textAreaRef.scrollHeight + "px";
+  }
+};
