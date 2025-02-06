@@ -14,3 +14,16 @@ export const autoGrow = (textAreaRef) => {
     textAreaRef.style.height = textAreaRef.scrollHeight + "px";
   }
 };
+
+export const setZIndex = (selectedCard, cardRefs) => {
+    if (!selectedCard) return;
+
+    const maxZIndex = Math.max(
+        ...Object.values(cardRefs)
+            .filter((card) => card)
+            .map((card) => parseInt(card.style.zIndex) || 0),
+        0
+    );
+
+    selectedCard.style.zIndex = maxZIndex + 1;
+};

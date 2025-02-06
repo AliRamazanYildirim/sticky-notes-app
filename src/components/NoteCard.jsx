@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Trash from "../icons/Trash";
 import useNotesStore from "../store/useNotesStore";
-import { setNewOffset, autoGrow } from "../utils/utils";
+import { setNewOffset, autoGrow, setZIndex } from "../utils/utils";
 
 const NoteCard = () => {
   const {
@@ -22,6 +22,9 @@ const NoteCard = () => {
   const handleMouseDown = (e, id) => {
     setDraggingId(id);
     setMouseStartPos({ x: e.clientX, y: e.clientY });
+    if (cardRefs[id]) {
+      setZIndex(cardRefs[id], cardRefs);
+    }
   };
 
   const handleMouseMove = (e) => {
@@ -69,6 +72,11 @@ const NoteCard = () => {
               style={{ color: note.colors.colorText }}
               defaultValue={note.body}
               onInput={() => autoGrow(textAreaRefs[note.$id])}
+              onFocus={() => {
+                if (cardRefs[note.$id]) {
+                  setZIndex(cardRefs[note.$id], cardRefs);
+                }
+              }}
             ></textarea>
           </div>
         </div>
